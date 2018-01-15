@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+
+
+<html lang="ru">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="themes/yandex/styles/screen.css" />
+	<!-- <link rel="stylesheet" href="themes/yandex/styles/prism-white.css" /> -->
+	<link rel="stylesheet" href="bower_components/prismjs/prism-twilight.css" />
+	
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>How I Learned<br />to Stop Worrying<br />and Love the BFG</h1>
+		<p>Надежда Миргородская, <a href="http://yandex.ru/">Яндекс</a></p>
+
+	</header>
+
+	<section id="img-srcthemesyandeximageslogorussvg" class="slide cover"><div><h2><img src="themes/yandex/images/logo_rus.svg" /></h2>
+
+</div></section>
+<section class="slide shout" id="cover"><div><h2>How I Learned<br />to Stop Worrying<br />and Love the BFG</h2>
+
+<div class="s">
+    <img src="pictures/pycon_logo2.png" />
+</div>
+
+<div class="info">
+	<p class="author">
+	    Надежда Миргородская, <br />
+	    инженер по нагрузочному тестированию<br />
+  	    Яндекс
+	</p>
+</div>
+
+</div></section>
+<section class="slide shout" id="picturesbfg-resizedpng"><div><h2><img src="pictures/bfg-resized.png" alt="" /></h2>
+
+</div></section>
+<section class="slide" id="section"><div><h2>План</h2>
+<ul>
+  <li>Что такое BFG</li>
+  <li>Где его взять</li>
+  <li>И что с ним делать</li>
+</ul>
+
+</div></section>
+<section class="slide section" id="nbsp"><div><h2> </h2>
+
+<h3 id="bfg">Что такое BFG</h3>
+
+</div></section>
+<section class="slide" id="section-1"><div><h2>Часть Яндекс.Танка</h2>
+<p><img src="pictures/tank_components.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-2"><div><h2>Генераторы нагрузки</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col"> </th>
+      <th scope="col">Phantom</th>
+      <th scope="col">JMeter</th>
+      <th scope="col">BFG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Производительность</td>
+      <td>Высокая</td>
+      <td>Средняя</td>
+      <td>Средняя</td>
+    </tr>
+    <tr>
+      <td>Интерфейс</td>
+      <td>Консоль</td>
+      <td>GUI</td>
+      <td>IDE</td>
+    </tr>
+    <tr>
+      <td>Сценарии?</td>
+      <td>Нет</td>
+      <td>Да</td>
+      <td>Да</td>
+    </tr>
+    <tr>
+      <td>Язык сценария</td>
+      <td>-</td>
+      <td>Java</td>
+      <td>Python</td>
+    </tr>
+  </tbody>
+</table>
+
+</div></section>
+<section class="slide" id="bfg-pro-et-contra"><div><h2>BFG: pro et contra</h2>
+<ul>
+  <li>Плюсы
+    <ul>
+      <li>это код</li>
+      <li>экосистема Питона</li>
+    </ul>
+  </li>
+  <li>Минусы
+    <ul>
+      <li>это код</li>
+      <li>производительность пушки не так высока</li>
+    </ul>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide section" id="nbsp-1"><div><h2> </h2>
+
+<h3 id="section-3">Где взять</h3>
+
+</div></section>
+<section class="slide" id="section-4"><div><h2>Это опенсорс</h2>
+<p><br />
+Github: <b>https://github.com/yandex/yandex-tank</b>
+<br /><br />
+Web service: <b>https://overload.yandex.net</b>
+<br /><br />
+Support chat: <b>https://gitter.im/yandex/yandex-tank</b></p>
+
+</div></section>
+<section class="slide section" id="nbsp-2"><div><h2> </h2>
+
+<h3 id="section-5">И что с ним делать</h3>
+
+</div></section>
+<section class="slide" id="section-6"><div><h2>Вопросы производительности</h2>
+<ul>
+  <li>Время ответа</li>
+  <li>Доля ошибок</li>
+  <li>Стабильность</li>
+  <li>Предельная нагрузка</li>
+  <li>Отказ и восстановление реплики</li>
+</ul>
+
+</div></section>
+<section class="slide center" id="section-7"><div><h2>Нам бы побыстрее: сценарий</h2>
+
+<p><img src="pictures/scenario_skel.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="bfg-testware"><div><h2>BFG testware</h2>
+
+<ul>
+  <li>Сценарий</li>
+  <li>Тестовые данные</li>
+  <li>Конфигурационный файл</li>
+</ul>
+
+</div></section>
+<section class="slide" id="bfg--loadtest"><div><h2>Сценарий BFG: класс LoadTest</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LoadTest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gun</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gun</span> <span class="o">=</span> <span class="n">gun</span>
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">get_state_url</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">parse_state</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">apply_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-8"><div><h2>Добавляем измерения</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LoadTest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">sef</span><span class="o">.</span><span class="n">gun</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="s">'get_state'</span><span class="p">)</span> <span class="k">as</span> <span class="n">measure</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+            <span class="n">measure</span><span class="p">[</span><span class="s">'proto_code'</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">parse_state</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="default"><div><h2>Порядок вызовов: метод default</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="n">get_state_url</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">until</span> <span class="n">state</span> <span class="o">==</span> <span class="s">'DONE'</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_state</span><span class="p">()</span>
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-9"><div><h2>Базовый конфиг</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nn">[bfg]</span>
+<span class="py">gun_type</span> <span class="p">=</span> <span class="s">ultimate</span>
+<span class="py">loop</span> <span class="p">=</span> <span class="s">100</span>
+<span class="py">instances</span> <span class="p">=</span> <span class="s">10</span>
+<span class="py">instances_schedule</span> <span class="p">=</span> <span class="s">const(10,10m)</span>
+<span class="py">ammofile</span> <span class="p">=</span> <span class="s">./ammo.txt</span>
+
+<span class="nn">[ultimate_gun]</span>
+<span class="py">module_name</span> <span class="p">=</span> <span class="s">performance_test</span>
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide center" id="section-10"><div><h2>Время ответа по запросам</h2>
+<p><br />
+<img src="./pictures/tags_time1.png" alt="" /></p>
+
+</div></section>
+<section class="slide center" id="section-11"><div><h2>Доля ошибок по запросам</h2>
+<p><br />
+<img src="./pictures/tags_http1.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-12"><div><h2>Теги внутри тегов: общее время транзакции</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">gun</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="s">"activated"</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">gun</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="s">"apply"</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="nb">apply</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">gun</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="s">"check_state"</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_state</span><span class="p">()</span>
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide" id="section-13"><div><h2>Вопросы производительности</h2>
+
+<ul>
+  <li>Время ответа +</li>
+  <li>Доля ошибок +</li>
+  <li>Стабильность</li>
+  <li>Предельная нагрузка</li>
+  <li>Отказ и восстановление реплики</li>
+</ul>
+
+</div></section>
+<section class="slide center" id="section-14"><div><h2>Стабильность</h2>
+
+<p><img src="./pictures/test_long.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-15"><div><h2>Вопросы производительности</h2>
+
+<ul>
+  <li>Время ответа +</li>
+  <li>Доля ошибок +</li>
+  <li>Стабильность +</li>
+  <li>Предельная нагрузка</li>
+  <li>Отказ и восстановление реплики</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-16"><div><h2>Профиль нагрузки: интенсивность</h2>
+
+<ul>
+  <li>instances_schedule
+    <ul>
+      <li>instances_schedule = line(1,3,3m)</li>
+    </ul>
+  </li>
+  <li>rps_schedule
+    <ul>
+      <li>instances = 10</li>
+      <li>rps_schedule = const(50,5m)</li>
+    </ul>
+  </li>
+  <li>free_instances
+    <ul>
+      <li>instances = 10</li>
+    </ul>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-17"><div><h2>Подкладываем соломки</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nn">[autostop]</span>
+<span class="py">autostop</span> <span class="p">=</span> <span class="s">http(5xx, 20%, 60s)</span>
+<span class="py">autostop</span> <span class="p">=</span> <span class="s">time(60s, 10m)</span>
+</code></pre>
+</div>
+
+</div></section>
+<section class="slide center" id="section-18"><div><h2>Стресс-тест</h2>
+<p><br />
+<img src="./pictures/test_stress.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-19"><div><h2>Вопросы производительности</h2>
+
+<ul>
+  <li>Время ответа +</li>
+  <li>Доля ошибок +</li>
+  <li>Стабильность +</li>
+  <li>Предельная нагрузка +</li>
+  <li>Отказ и восстановление реплики</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-20"><div><h2>Меняем окружение на ходу</h2>
+
+<ul>
+  <li>Гасим реплику</li>
+  <li>Проверяем состояния</li>
+  <li>Фиксируем объем базы</li>
+</ul>
+
+</div></section>
+<section class="slide" id="recovery-test"><div><h2>Recovery test</h2>
+
+<p><img src="pictures/events.png" alt="" /></p>
+
+</div></section>
+<section class="slide" id="section-21"><div><h2>Много тестов</h2>
+
+<ul>
+  <li>Load test</li>
+  <li>Stress test</li>
+  <li>Stability test</li>
+  <li>Recovery test</li>
+  <li>Volume test</li>
+</ul>
+
+</div></section>
+<section class="slide" id="profit"><div><h2>Profit!</h2>
+
+<ul>
+  <li>Повторяемость</li>
+  <li>Входит в регрессионный набор</li>
+  <li>Однородность с функциональными тестами</li>
+  <li>Легко вносить изменения</li>
+</ul>
+
+</div></section>
+<section class="slide shout" id="contacts"><div><h2>Спасибо!</h2>
+<p><br /></p>
+<div class="info">
+<p class="author">Надежда Миргородская</p>
+<p class="position">инженер по нагрузочному тестированию</p>
+
+    <div class="contacts">
+        <p class="contacts-left contacts-top github">https://szypulka.github.io</p>
+        <p class="contacts-right contacts-bottom mail">szypulka@yandex-team.ru</p>
+        <p class="contacts-left contacts-bottom">telegram: szypulka</p>
+    </div>
+</div>
+
+</div></section>
+
+	
+	<div class="progress"><div></div></div>
+	<script src="bower_components/shower-core/shower.min.js"></script>
+	<script src="bower_components/prismjs/prism.js"></script>
+	<!-- Copyright © 2017 Надежда Миргородская, Яндекс — http://yandex.ru/ -->
+</body>
+</html>
